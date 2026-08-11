@@ -2798,3 +2798,872 @@ button:hover::before {
     margin-top: 28px;
     width: max-content;
 }
+
+/* =========================================================
+   HERO — REFINED NEON ORBIT + PREMIUM ACTIONS
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   Hero Action Row
+--------------------------------------------------------- */
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+
+/* ---------------------------------------------------------
+   Premium Download CV Button
+--------------------------------------------------------- */
+
+.hero-cv-button {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    height: 62px;
+    min-width: 280px;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    overflow: hidden;
+
+    border: 1.5px solid #38bdf8 !important;
+    border-radius: 18px !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.12),
+            rgba(15, 23, 42, 0.72)
+        ) !important;
+
+    color: #e0f2fe !important;
+
+    text-decoration: none !important;
+
+    box-shadow:
+        0 0 10px rgba(56, 189, 248, 0.25),
+        inset 0 0 15px rgba(56, 189, 248, 0.04);
+
+    transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+
+/* Animated light sweep */
+
+.hero-cv-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 75%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.20),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition:
+        left 0.8s ease;
+
+    pointer-events: none;
+}
+
+
+/* Soft moving glow */
+
+.hero-cv-button::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 20%,
+            rgba(56, 189, 248, 0.5),
+            transparent 80%
+        );
+
+    opacity: 0;
+
+    filter: blur(7px);
+
+    transition:
+        opacity 0.4s ease;
+
+    z-index: -1;
+}
+
+
+.hero-cv-button:hover {
+    transform:
+        translateY(-5px)
+        scale(1.025);
+
+    border-color: #67e8f9 !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 0 12px rgba(56, 189, 248, 0.65),
+        0 0 28px rgba(56, 189, 248, 0.35),
+        0 0 55px rgba(56, 189, 248, 0.18);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.18),
+            rgba(15, 23, 42, 0.85)
+        ) !important;
+}
+
+
+.hero-cv-button:hover::before {
+    left: 140%;
+}
+
+
+.hero-cv-button:hover::after {
+    opacity: 1;
+}
+
+
+/* CV icon area */
+
+.cv-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 66px;
+    height: 100%;
+
+    border-right: 1px solid rgba(56, 189, 248, 0.35);
+
+    color: #38bdf8;
+
+    transition:
+        color 0.35s ease,
+        text-shadow 0.35s ease;
+}
+
+
+.cv-icon svg {
+    width: 25px;
+    height: 25px;
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+.hero-cv-button:hover .cv-icon {
+    color: #67e8f9;
+
+    text-shadow:
+        0 0 8px rgba(56, 189, 248, 0.9),
+        0 0 18px rgba(56, 189, 248, 0.45);
+}
+
+
+.hero-cv-button:hover .cv-icon svg {
+    transform:
+        translateY(3px);
+}
+
+
+/* CV text */
+
+.cv-text {
+    flex: 1;
+
+    padding-left: 20px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+
+    white-space: nowrap;
+}
+
+
+/* CV arrow */
+
+.cv-arrow {
+    width: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #38bdf8;
+
+    font-size: 25px;
+
+    transition:
+        transform 0.4s ease,
+        color 0.35s ease;
+}
+
+
+.hero-cv-button:hover .cv-arrow {
+    color: #67e8f9;
+
+    transform:
+        translateX(6px);
+
+    text-shadow:
+        0 0 10px rgba(56, 189, 248, 0.8);
+}
+
+
+/* ---------------------------------------------------------
+   Social Icons — Elegant Circular Treatment
+--------------------------------------------------------- */
+
+.hero-actions .social-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin: 0;
+}
+
+
+.hero-actions .social-links a {
+    position: relative;
+
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: 1px solid rgba(56, 189, 248, 0.65) !important;
+
+    border-radius: 50% !important;
+
+    background:
+        rgba(15, 23, 42, 0.55) !important;
+
+    color: #cbd5e1 !important;
+
+    text-decoration: none !important;
+
+    box-shadow:
+        0 0 8px rgba(56, 189, 248, 0.08);
+
+    transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+
+    overflow: hidden;
+}
+
+
+.hero-actions .social-links a svg {
+    width: 20px;
+    height: 20px;
+
+    position: relative;
+    z-index: 2;
+
+    transition:
+        transform 0.4s ease,
+        filter 0.35s ease;
+}
+
+
+/* Moving highlight */
+
+.hero-actions .social-links a::before {
+    content: "";
+
+    position: absolute;
+
+    top: -100%;
+    left: -70%;
+
+    width: 55%;
+    height: 300%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(103, 232, 249, 0.28),
+            transparent
+        );
+
+    transform: rotate(25deg);
+
+    transition:
+        left 0.7s ease;
+
+    pointer-events: none;
+}
+
+
+.hero-actions .social-links a:hover {
+    transform:
+        translateY(-6px)
+        scale(1.08);
+
+    color: #67e8f9 !important;
+
+    border-color: #67e8f9 !important;
+
+    background:
+        rgba(56, 189, 248, 0.08) !important;
+
+    box-shadow:
+        0 0 10px rgba(56, 189, 248, 0.65),
+        0 0 22px rgba(56, 189, 248, 0.35),
+        0 0 42px rgba(56, 189, 248, 0.15);
+}
+
+
+.hero-actions .social-links a:hover::before {
+    left: 130%;
+}
+
+
+.hero-actions .social-links a:hover svg {
+    transform:
+        scale(1.12);
+
+    filter:
+        drop-shadow(
+            0 0 6px rgba(103, 232, 249, 0.8)
+        );
+}
+
+
+/* ---------------------------------------------------------
+   PHOTO — Neon Orbit
+--------------------------------------------------------- */
+
+.profile-circle {
+    position: relative;
+
+    width: 320px;
+    height: 320px;
+
+    border: none !important;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #111c33;
+
+    isolation: isolate;
+
+    overflow: visible;
+
+    box-shadow:
+        0 0 25px rgba(56, 189, 248, 0.45),
+        0 0 60px rgba(56, 189, 248, 0.35),
+        0 0 110px rgba(168, 85, 247, 0.35),
+        0 0 150px rgba(56, 189, 248, 0.20);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+
+/* Photo itself */
+
+.profile-circle img {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid rgba(56, 189, 248, 0.75);
+
+    box-shadow:
+        inset 0 0 25px rgba(56, 189, 248, 0.12);
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+
+/* ---------------------------------------------------------
+   Orbit Arc 1
+--------------------------------------------------------- */
+
+.profile-circle::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -17px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            from 210deg,
+            transparent 0deg,
+            transparent 35deg,
+
+            #38bdf8 55deg,
+            #67e8f9 85deg,
+            transparent 112deg,
+
+            transparent 360deg
+        );
+
+    -webkit-mask:
+        radial-gradient(
+            farthest-side,
+            transparent calc(100% - 4px),
+            #000 calc(100% - 3px)
+        );
+
+    mask:
+        radial-gradient(
+            farthest-side,
+            transparent calc(100% - 4px),
+            #000 calc(100% - 3px)
+        );
+
+    filter:
+        drop-shadow(0 0 5px rgba(56, 189, 248, 0.9))
+        drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+
+    animation:
+        orbitForward 7s linear infinite;
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+
+/* ---------------------------------------------------------
+   Orbit Arc 2
+--------------------------------------------------------- */
+
+.profile-circle::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -17px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            from 30deg,
+            transparent 0deg,
+            transparent 35deg,
+
+            #67e8f9 55deg,
+            #38bdf8 85deg,
+            transparent 112deg,
+
+            transparent 360deg
+        );
+
+    -webkit-mask:
+        radial-gradient(
+            farthest-side,
+            transparent calc(100% - 4px),
+            #000 calc(100% - 3px)
+        );
+
+    mask:
+        radial-gradient(
+            farthest-side,
+            transparent calc(100% - 4px),
+            #000 calc(100% - 3px)
+        );
+
+    filter:
+        drop-shadow(0 0 5px rgba(103, 232, 249, 0.9))
+        drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
+
+    animation:
+        orbitReverse 9s linear infinite;
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+
+/* ---------------------------------------------------------
+   Photo Hover
+--------------------------------------------------------- */
+
+.profile-circle:hover {
+    transform:
+        scale(1.025);
+
+    box-shadow:
+        0 0 30px rgba(56, 189, 248, 0.65),
+        0 0 70px rgba(56, 189, 248, 0.45),
+        0 0 120px rgba(168, 85, 247, 0.45),
+        0 0 170px rgba(56, 189, 248, 0.25);
+}
+
+
+.profile-circle:hover img {
+    filter:
+        brightness(1.04)
+        saturate(1.05);
+
+    transform:
+        scale(1.01);
+}
+
+
+/* ---------------------------------------------------------
+   Orbit Motion
+--------------------------------------------------------- */
+
+@keyframes orbitForward {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@keyframes orbitReverse {
+
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   Hero Action Entrance
+--------------------------------------------------------- */
+
+.hero-actions {
+    opacity: 0;
+
+    animation:
+        heroScale 0.9s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+
+    animation-delay: 0.95s;
+}
+
+
+/* =========================================================
+   MOBILE HERO — REFINED PROFESSIONAL ALIGNMENT
+========================================================= */
+
+@media (max-width: 768px) {
+
+    /* -----------------------------------------
+       Hero content
+    ----------------------------------------- */
+
+    #home {
+        text-align: center;
+        padding-top: 45px;
+    }
+
+
+    .hero-content {
+        width: 100%;
+        max-width: 620px;
+        margin: 0 auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    /* -----------------------------------------
+       Greeting
+    ----------------------------------------- */
+
+    .hero-greeting {
+        margin-bottom: 14px !important;
+
+        font-size: 18px !important;
+
+        text-align: center;
+    }
+
+
+    /* -----------------------------------------
+       Name
+    ----------------------------------------- */
+
+    #home h1 {
+        margin-bottom: 12px !important;
+
+        font-size: clamp(42px, 10vw, 58px) !important;
+
+        line-height: 1.08 !important;
+
+        text-align: center;
+    }
+
+
+    /* -----------------------------------------
+       Typing title
+    ----------------------------------------- */
+
+    #home h2 {
+        margin-bottom: 24px !important;
+
+        font-size: clamp(23px, 6vw, 30px) !important;
+
+        line-height: 1.25 !important;
+
+        text-align: center;
+
+        min-height: 38px;
+
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------
+       Description
+    ----------------------------------------- */
+
+    .hero-description {
+        width: 92% !important;
+
+        max-width: 620px !important;
+
+        margin: 0 auto 30px !important;
+
+        font-size: 16px !important;
+
+        line-height: 1.7 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* -----------------------------------------
+       CV + Social row
+    ----------------------------------------- */
+
+    .hero-actions {
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 22px;
+
+        margin: 0 auto 30px;
+
+        padding: 0;
+    }
+
+
+    /* -----------------------------------------
+       Download CV
+    ----------------------------------------- */
+
+    .hero-cv-button {
+        width: min(310px, 88vw);
+
+        min-width: 0;
+
+        height: 58px;
+
+        margin: 0 !important;
+
+        border-radius: 17px !important;
+    }
+
+
+    .cv-icon {
+        width: 58px;
+    }
+
+
+    .cv-text {
+        padding-left: 12px;
+
+        font-size: 15px;
+
+        text-align: center;
+    }
+
+
+    .cv-arrow {
+        width: 50px;
+
+        font-size: 23px;
+    }
+
+
+    /* -----------------------------------------
+       Social icons
+    ----------------------------------------- */
+
+    .hero-actions .social-links {
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 16px;
+
+        flex-wrap: nowrap;
+
+        margin: 0;
+    }
+
+
+    .hero-actions .social-links a {
+        width: 50px;
+
+        height: 50px;
+
+        flex: 0 0 50px;
+    }
+
+
+    .hero-actions .social-links a svg {
+        width: 19px;
+
+        height: 19px;
+    }
+
+
+    /* -----------------------------------------
+       Photo
+    ----------------------------------------- */
+
+    .hero-image {
+        width: 100%;
+
+        margin-top: 15px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
+    .profile-circle {
+        width: 240px;
+
+        height: 240px;
+    }
+
+
+    .profile-circle::before,
+    .profile-circle::after {
+        inset: -13px;
+    }
+
+
+    /* -----------------------------------------
+       Tagline
+    ----------------------------------------- */
+
+    .hero-tagline {
+        margin-top: 25px !important;
+
+        width: max-content;
+
+        max-width: 90%;
+
+        font-size: 12px;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   Reduced Motion Accessibility
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .profile-circle::before,
+    .profile-circle::after,
+    .hero-actions,
+    .hero-cv-button,
+    .hero-actions .social-links a {
+        animation: none !important;
+    }
+
+}
