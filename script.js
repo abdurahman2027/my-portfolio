@@ -1,36 +1,185 @@
 // =========================
-// Mobile Menu
+// Navigation Menu
 // =========================
 
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-const navItems = document.querySelectorAll(".nav-links a");
+const menuToggle =
+    document.querySelector(".menu-toggle");
+
+const navLinks =
+    document.querySelector(".nav-links");
+
+const navItems =
+    document.querySelectorAll(".nav-links a");
 
 
 if (menuToggle && navLinks) {
+
+    // Open / close menu
 
     menuToggle.addEventListener("click", () => {
 
         navLinks.classList.toggle("active");
 
+        menuToggle.classList.toggle("active");
+
+
+        const isOpen =
+            navLinks.classList.contains("active");
+
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+        );
+
     });
 
-}
 
-
-// Close mobile menu after clicking a link
+    // =========================
+// Navigate to Selected Section
+// =========================
 
 navItems.forEach((link) => {
 
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
 
-        if (navLinks) {
-            navLinks.classList.remove("active");
-        }
+        const target =
+            link.getAttribute("href");
+
+
+        // Make sure the link points to a section
+
+        if (
+    target &&
+    target.startsWith("#")
+) {
+
+    const sectionId =
+        target.substring(1);
+
+
+    // Show the selected section
+
+    showSelectedSection(
+        sectionId
+    );
+
+
+    // Find the selected section
+
+    const targetSection =
+        document.getElementById(sectionId);
+
+
+    if (targetSection) {
+
+        setTimeout(() => {
+
+            targetSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 50);
+
+    }
+
+}
+
+        // Close navigation menu
+
+        navLinks.classList.remove(
+            "active"
+        );
+
+        menuToggle.classList.remove(
+            "active"
+        );
+
+
+        // Reset accessibility state
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
 
     });
 
 });
+
+
+    // Close menu when clicking outside
+
+    document.addEventListener("click", (event) => {
+
+        if (
+            !navLinks.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
+
+            navLinks.classList.remove("active");
+
+            menuToggle.classList.remove("active");
+
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+
+        }
+
+    });
+
+
+    // Close menu with Escape
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+
+            navLinks.classList.remove("active");
+
+            menuToggle.classList.remove("active");
+
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+
+        }
+
+    });
+
+}
 
 
 
@@ -38,8 +187,99 @@ navItems.forEach((link) => {
 // Active Navigation
 // =========================
 
-const sections = document.querySelectorAll("main section");
+const sections =
+    document.querySelectorAll("main section");
 
+
+/*
+    Home and About remain visible on the
+    main homepage.
+
+    All other sections are shown only when
+    selected from the navigation menu.
+*/
+
+const primarySections = [
+    "home",
+    "about"
+];
+
+
+const menuControlledSections = [
+    "skills",
+    "projects",
+    "experience",
+    "education",
+    "awards",
+    "services",
+    "leadership",
+    "publications",
+    "volunteer",
+    "contact"
+];
+
+
+// =========================
+// Show Selected Section
+// =========================
+
+function showSelectedSection(sectionId) {
+
+    sections.forEach((section) => {
+
+        const id =
+            section.getAttribute("id");
+
+
+        // Home and About always remain visible
+
+        if (
+            primarySections.includes(id)
+        ) {
+
+            section.style.display = "";
+
+            return;
+
+        }
+
+
+        // Hide all menu-controlled sections first
+
+        if (
+            menuControlledSections.includes(id)
+        ) {
+
+            section.style.display = "none";
+
+        }
+
+    });
+
+
+    // Show the selected section only
+
+    if (
+        menuControlledSections.includes(sectionId)
+    ) {
+
+        const selectedSection =
+            document.getElementById(sectionId);
+
+
+        if (selectedSection) {
+
+            selectedSection.style.display = "";
+
+        }
+
+    }
+
+}
+
+// =========================
+// Update Active Navigation
+// =========================
 
 function updateActiveNavigation() {
 
@@ -48,8 +288,17 @@ function updateActiveNavigation() {
 
     sections.forEach((section) => {
 
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
+        if (
+            section.style.display === "none"
+        ) {
+
+            return;
+
+        }
+
+
+        const sectionTop =
+            section.offsetTop;
 
 
         if (
@@ -88,15 +337,20 @@ function updateActiveNavigation() {
 }
 
 
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation
-);
+// =========================
+// Initial State
+// =========================
+
+showSelectedSection("");
 
 
 updateActiveNavigation();
 
 
+window.addEventListener(
+    "scroll",
+    updateActiveNavigation
+);
 
 // =========================
 // Section Entrance Animation
@@ -2269,3 +2523,998 @@ async function loadSkills() {
 // =========================================
 
 loadSkills();
+
+// =========================================
+// Google Sheets — My Services
+// =========================================
+
+const servicesCSV =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOZJg2ABZdrGu98NpvDccP3Gl4uOcc05yykbxUjoyYlYMibC1SY-9c5IumVyw69ZbWQg3VOmj8PW02/pub?gid=2067136816&single=true&output=csv";
+
+
+// =========================================
+// Load Services from Google Sheets
+// =========================================
+
+async function loadServices() {
+
+    try {
+
+        const response =
+            await fetch(servicesCSV);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load Services data."
+            );
+
+        }
+
+
+        const csvText =
+            await response.text();
+
+
+        const rows =
+            parseCSV(csvText);
+
+
+        if (rows.length < 2) {
+
+            throw new Error(
+                "No Services data found."
+            );
+
+        }
+
+
+        // First row = headings
+
+        const headers =
+            rows[0].map(
+                header =>
+                    header
+                        .trim()
+                        .toLowerCase()
+            );
+
+
+        const titleIndex =
+            headers.indexOf("title");
+
+
+        const descriptionIndex =
+            headers.indexOf("description");
+
+
+        if (
+            titleIndex === -1 ||
+            descriptionIndex === -1
+        ) {
+
+            throw new Error(
+                "Services sheet must contain: title and description."
+            );
+
+        }
+
+
+        // Find the Services container
+
+        const servicesContent =
+            document.querySelector(
+                "#services .services-content"
+            );
+
+
+        if (!servicesContent) {
+
+            return;
+
+        }
+
+
+        // Clear existing HTML cards
+
+        servicesContent.innerHTML = "";
+
+
+        // Create Services cards
+
+        rows
+            .slice(1)
+            .forEach(row => {
+
+                const title =
+                    row[titleIndex]
+                        ?.trim() || "";
+
+
+                const description =
+                    row[descriptionIndex]
+                        ?.trim() || "";
+
+
+                // Skip empty rows
+
+                if (!title) {
+
+                    return;
+
+                }
+
+
+                const serviceItem =
+                    document.createElement("div");
+
+
+                serviceItem.className =
+                    "service-item";
+
+
+                const serviceTitle =
+                    document.createElement("h3");
+
+
+                serviceTitle.textContent =
+                    title;
+
+
+                const serviceDescription =
+                    document.createElement("p");
+
+
+                serviceDescription.textContent =
+                    description;
+
+
+                serviceItem.appendChild(
+                    serviceTitle
+                );
+
+
+                serviceItem.appendChild(
+                    serviceDescription
+                );
+
+
+                servicesContent.appendChild(
+                    serviceItem
+                );
+
+            });
+
+
+        console.log(
+            "Services loaded successfully from Google Sheets."
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Services loading error:",
+            error
+        );
+
+        // Existing HTML remains if
+        // Google Sheets cannot be reached.
+
+    }
+
+}
+
+
+// =========================================
+// Start Services Loading
+// =========================================
+
+loadServices();
+
+// =========================================
+// Google Sheets — Leadership
+// =========================================
+
+const leadershipCSV =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOZJg2ABZdrGu98NpvDccP3Gl4uOcc05yykbxUjoyYlYMibC1SY-9c5IumVyw69ZbWQg3VOmj8PW02/pub?gid=2086923236&single=true&output=csv";
+
+
+// =========================================
+// Load Leadership from Google Sheets
+// =========================================
+
+async function loadLeadership() {
+
+    try {
+
+        const response =
+            await fetch(leadershipCSV);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load Leadership data."
+            );
+
+        }
+
+
+        const csvText =
+            await response.text();
+
+
+        const rows =
+            parseCSV(csvText);
+
+
+        if (rows.length < 2) {
+
+            throw new Error(
+                "No Leadership data found."
+            );
+
+        }
+
+
+        // First row = headings
+
+        const headers =
+            rows[0].map(
+                header =>
+                    header
+                        .trim()
+                        .toLowerCase()
+            );
+
+
+        const roleIndex =
+            headers.indexOf("role");
+
+
+        const organizationIndex =
+            headers.indexOf("organization");
+
+
+        const periodIndex =
+            headers.indexOf("period");
+
+
+        const descriptionIndex =
+            headers.indexOf("description");
+
+
+        const impactIndex =
+            headers.indexOf("impact");
+
+
+        if (
+            roleIndex === -1 ||
+            organizationIndex === -1 ||
+            periodIndex === -1 ||
+            descriptionIndex === -1 ||
+            impactIndex === -1
+        ) {
+
+            throw new Error(
+                "Leadership sheet must contain: role, organization, period, description, impact."
+            );
+
+        }
+
+
+        // Find Leadership container
+
+        const leadershipContent =
+            document.querySelector(
+                "#leadership .leadership-content"
+            );
+
+
+        if (!leadershipContent) {
+
+            return;
+
+        }
+
+
+        // Clear existing Leadership cards
+
+        leadershipContent.innerHTML = "";
+
+
+        // Create Leadership items
+
+        rows
+            .slice(1)
+            .forEach(row => {
+
+                const role =
+                    row[roleIndex]
+                        ?.trim() || "";
+
+
+                const organization =
+                    row[organizationIndex]
+                        ?.trim() || "";
+
+
+                const period =
+                    row[periodIndex]
+                        ?.trim() || "";
+
+
+                const description =
+                    row[descriptionIndex]
+                        ?.trim() || "";
+
+
+                const impact =
+                    row[impactIndex]
+                        ?.trim() || "";
+
+
+                // Skip empty rows
+
+                if (!role) {
+
+                    return;
+
+                }
+
+
+                const leadershipItem =
+                    document.createElement("div");
+
+
+                leadershipItem.className =
+                    "leadership-item";
+
+
+                const roleElement =
+                    document.createElement("h3");
+
+
+                roleElement.textContent =
+                    role;
+
+
+                const organizationElement =
+                    document.createElement("span");
+
+
+                organizationElement.className =
+                    "leadership-organization";
+
+
+                organizationElement.textContent =
+                    organization;
+
+
+                const periodElement =
+                    document.createElement("span");
+
+
+                periodElement.className =
+                    "leadership-period";
+
+
+                periodElement.textContent =
+                    period;
+
+
+                const descriptionElement =
+                    document.createElement("p");
+
+
+                descriptionElement.textContent =
+                    description;
+
+
+                const impactElement =
+                    document.createElement("p");
+
+
+                impactElement.className =
+                    "leadership-impact";
+
+
+                impactElement.textContent =
+                    impact;
+
+
+                leadershipItem.appendChild(
+                    roleElement
+                );
+
+
+                leadershipItem.appendChild(
+                    organizationElement
+                );
+
+
+                leadershipItem.appendChild(
+                    periodElement
+                );
+
+
+                leadershipItem.appendChild(
+                    descriptionElement
+                );
+
+
+                leadershipItem.appendChild(
+                    impactElement
+                );
+
+
+                leadershipContent.appendChild(
+                    leadershipItem
+                );
+
+            });
+
+
+        console.log(
+            "Leadership loaded successfully from Google Sheets."
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Leadership loading error:",
+            error
+        );
+
+        // Existing HTML remains visible
+        // if Google Sheets cannot be reached.
+
+    }
+
+}
+
+
+// =========================================
+// Start Leadership Loading
+// =========================================
+
+loadLeadership();
+
+// =========================================
+// Google Sheets — Publications
+// =========================================
+
+const publicationsCSV =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOZJg2ABZdrGu98NpvDccP3Gl4uOcc05yykbxUjoyYlYMibC1SY-9c5IumVyw69ZbWQg3VOmj8PW02/pub?gid=1783093236&single=true&output=csv";
+
+
+// =========================================
+// Load Publications from Google Sheets
+// =========================================
+
+async function loadPublications() {
+
+    try {
+
+        const response =
+            await fetch(publicationsCSV);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load Publications data."
+            );
+
+        }
+
+
+        const csvText =
+            await response.text();
+
+
+        const rows =
+            parseCSV(csvText);
+
+
+        if (rows.length < 2) {
+
+            throw new Error(
+                "No Publications data found."
+            );
+
+        }
+
+
+        // First row = headings
+
+        const headers =
+            rows[0].map(
+                header =>
+                    header
+                        .trim()
+                        .toLowerCase()
+            );
+
+
+        const titleIndex =
+            headers.indexOf("title");
+
+
+        const categoryIndex =
+            headers.indexOf("category");
+
+
+        const descriptionIndex =
+            headers.indexOf("description");
+
+
+        const linkIndex =
+            headers.indexOf("link");
+
+
+        if (
+            titleIndex === -1 ||
+            descriptionIndex === -1
+        ) {
+
+            throw new Error(
+                "Publications sheet must contain: title and description."
+            );
+
+        }
+
+
+        // Find Publications container
+
+        const publicationsContent =
+            document.querySelector(
+                "#publications .publications-content"
+            );
+
+
+        if (!publicationsContent) {
+
+            return;
+
+        }
+
+
+        // Clear existing Publications
+
+        publicationsContent.innerHTML = "";
+
+
+        // Create Publication items
+
+        rows
+            .slice(1)
+            .forEach(row => {
+
+                const title =
+                    row[titleIndex]
+                        ?.trim() || "";
+
+
+                const category =
+                    categoryIndex !== -1
+                        ? row[categoryIndex]
+                            ?.trim() || ""
+                        : "";
+
+
+                const description =
+                    row[descriptionIndex]
+                        ?.trim() || "";
+
+
+                const link =
+                    linkIndex !== -1
+                        ? row[linkIndex]
+                            ?.trim() || ""
+                        : "";
+
+
+                // Skip empty rows
+
+                if (!title) {
+
+                    return;
+
+                }
+
+
+                const publicationItem =
+                    document.createElement("div");
+
+
+                publicationItem.className =
+                    "publication-item";
+
+
+                // Category
+
+                if (category) {
+
+                    const categoryElement =
+                        document.createElement("span");
+
+
+                    categoryElement.className =
+                        "publication-category";
+
+
+                    categoryElement.textContent =
+                        category;
+
+
+                    publicationItem.appendChild(
+                        categoryElement
+                    );
+
+                }
+
+
+                // Title
+
+                const titleElement =
+                    document.createElement("h3");
+
+
+                titleElement.textContent =
+                    title;
+
+
+                publicationItem.appendChild(
+                    titleElement
+                );
+
+
+                // Description
+
+                const descriptionElement =
+                    document.createElement("p");
+
+
+                descriptionElement.textContent =
+                    description;
+
+
+                publicationItem.appendChild(
+                    descriptionElement
+                );
+
+
+                // Optional link
+
+                if (link) {
+
+                    const linkElement =
+                        document.createElement("a");
+
+
+                    linkElement.href =
+                        link;
+
+
+                    linkElement.target =
+                        "_blank";
+
+
+                    linkElement.rel =
+                        "noopener noreferrer";
+
+
+                    linkElement.textContent =
+                        "Read More ↗";
+
+
+                    publicationItem.appendChild(
+                        linkElement
+                    );
+
+                }
+
+
+                publicationsContent.appendChild(
+                    publicationItem
+                );
+
+            });
+
+
+        console.log(
+            "Publications loaded successfully from Google Sheets."
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Publications loading error:",
+            error
+        );
+
+        // Existing HTML remains visible
+        // if Google Sheets cannot be reached.
+
+    }
+
+}
+
+
+// =========================================
+// Start Publications Loading
+// =========================================
+
+loadPublications();
+
+// =========================================
+// Google Sheets — Volunteer Service
+// =========================================
+
+const volunteerCSV =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOZJg2ABZdrGu98NpvDccP3Gl4uOcc05yykbxUjoyYlYMibC1SY-9c5IumVyw69ZbWQg3VOmj8PW02/pub?gid=1908269188&single=true&output=csv";
+
+
+// =========================================
+// Load Volunteer Service from Google Sheets
+// =========================================
+
+async function loadVolunteer() {
+
+    try {
+
+        const response =
+            await fetch(volunteerCSV);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load Volunteer Service data."
+            );
+
+        }
+
+
+        const csvText =
+            await response.text();
+
+
+        const rows =
+            parseCSV(csvText);
+
+
+        if (rows.length < 2) {
+
+            throw new Error(
+                "No Volunteer Service data found."
+            );
+
+        }
+
+
+        // First row = headings
+
+        const headers =
+            rows[0].map(
+                header =>
+                    header
+                        .trim()
+                        .toLowerCase()
+            );
+
+
+        const roleIndex =
+            headers.indexOf("role");
+
+
+        const organizationIndex =
+            headers.indexOf("organization");
+
+
+        const periodIndex =
+            headers.indexOf("period");
+
+
+        const descriptionIndex =
+            headers.indexOf("description");
+
+
+        if (
+            roleIndex === -1 ||
+            organizationIndex === -1 ||
+            periodIndex === -1 ||
+            descriptionIndex === -1
+        ) {
+
+            throw new Error(
+                "Volunteer sheet must contain: role, organization, period, description."
+            );
+
+        }
+
+
+        // Find Volunteer Service container
+
+        const volunteerContent =
+            document.querySelector(
+                "#volunteer .volunteer-content"
+            );
+
+
+        if (!volunteerContent) {
+
+            return;
+
+        }
+
+
+        // Clear existing Volunteer items
+
+        volunteerContent.innerHTML = "";
+
+
+        // Create Volunteer Service items
+
+        rows
+            .slice(1)
+            .forEach(row => {
+
+                const role =
+                    row[roleIndex]
+                        ?.trim() || "";
+
+
+                const organization =
+                    row[organizationIndex]
+                        ?.trim() || "";
+
+
+                const period =
+                    row[periodIndex]
+                        ?.trim() || "";
+
+
+                const description =
+                    row[descriptionIndex]
+                        ?.trim() || "";
+
+
+                // Skip empty rows
+
+                if (!role) {
+
+                    return;
+
+                }
+
+
+                const volunteerItem =
+                    document.createElement("div");
+
+
+                volunteerItem.className =
+                    "volunteer-item";
+
+
+                // Role
+
+                const roleElement =
+                    document.createElement("h3");
+
+
+                roleElement.textContent =
+                    role;
+
+
+                volunteerItem.appendChild(
+                    roleElement
+                );
+
+
+                // Organization
+
+                if (organization) {
+
+                    const organizationElement =
+                        document.createElement("span");
+
+
+                    organizationElement.className =
+                        "volunteer-organization";
+
+
+                    organizationElement.textContent =
+                        organization;
+
+
+                    volunteerItem.appendChild(
+                        organizationElement
+                    );
+
+                }
+
+
+                // Period
+
+                if (period) {
+
+                    const periodElement =
+                        document.createElement("span");
+
+
+                    periodElement.className =
+                        "volunteer-period";
+
+
+                    periodElement.textContent =
+                        period;
+
+
+                    volunteerItem.appendChild(
+                        periodElement
+                    );
+
+                }
+
+
+                // Description
+
+                const descriptionElement =
+                    document.createElement("p");
+
+
+                descriptionElement.textContent =
+                    description;
+
+
+                volunteerItem.appendChild(
+                    descriptionElement
+                );
+
+
+                volunteerContent.appendChild(
+                    volunteerItem
+                );
+
+            });
+
+
+        console.log(
+            "Volunteer Service loaded successfully from Google Sheets."
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Volunteer Service loading error:",
+            error
+        );
+
+        // Existing HTML remains visible
+        // if Google Sheets cannot be reached.
+
+    }
+
+}
+
+
+// =========================================
+// Start Volunteer Service Loading
+// =========================================
+
+loadVolunteer();
