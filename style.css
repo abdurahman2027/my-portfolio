@@ -366,24 +366,16 @@ article h3 {
     align-items: center;
 
     background: #111c33;
-    box-shadow:
-        0 0 25px #38bdf8,
-        0 0 60px rgba(56, 189, 248, 0.8),
-        0 0 100px rgba(168, 85, 247, 0.6),
-        0 0 150px rgba(56, 189, 248, 0.4);
+
     transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
+        transform 0.4s ease;
 }
+
 
 .profile-circle:hover {
     transform: scale(1.04);
-    box-shadow:
-        0 0 35px #38bdf8,
-        0 0 80px rgba(56, 189, 248, 0.9),
-        0 0 130px rgba(168, 85, 247, 0.8),
-        0 0 180px rgba(56, 189, 248, 0.5);
 }
+
 
 .profile-circle img {
     width: 100%;
@@ -391,7 +383,6 @@ article h3 {
     object-fit: cover;
     border-radius: 50%;
 }
-
 /* =========================================
    NAVIGATION MENU
    Desktop + Mobile
@@ -5843,3 +5834,552 @@ main section {
     }
 
 }
+
+/* =========================================================
+   CONTACT CARDS — PROFESSIONAL DESIGN
+========================================================= */
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+
+    padding: 22px 24px;
+
+    border: 1px solid rgba(56, 189, 248, 0.16);
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* Icon */
+
+.contact-item .contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 48px;
+
+    border-radius: 12px;
+
+    color: #67e8f9;
+
+    background:
+        rgba(56, 189, 248, 0.08);
+
+    border:
+        1px solid rgba(103, 232, 249, 0.28);
+
+    font-size: 21px;
+
+    box-shadow:
+        0 0 14px rgba(56, 189, 248, 0.06);
+}
+
+
+.contact-item .contact-icon i {
+    line-height: 1;
+}
+
+
+/* Content */
+
+.contact-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+.contact-item-content h4 {
+    margin: 0 0 5px;
+
+    color: #f8fafc;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+
+.contact-item-content p {
+    margin: 0 0 12px;
+
+    color: #aebbd0;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* Action link */
+
+.contact-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #38bdf8;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        gap 0.25s ease;
+}
+
+
+.contact-link span {
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.contact-link:hover {
+    color: #67e8f9;
+
+    gap: 11px;
+}
+
+
+.contact-link:hover span {
+    transform:
+        translateX(3px);
+}
+
+
+/* Card hover */
+
+.contact-item:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(56, 189, 248, 0.38);
+
+    background:
+        rgba(56, 189, 248, 0.035);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+
+.contact-item:hover .contact-icon {
+    border-color:
+        rgba(103, 232, 249, 0.55);
+
+    box-shadow:
+        0 0 18px rgba(56, 189, 248, 0.12);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .contact-item {
+        padding: 18px;
+
+        gap: 14px;
+    }
+
+
+    .contact-item .contact-icon {
+        width: 42px;
+        height: 42px;
+
+        flex-basis: 42px;
+
+        font-size: 18px;
+    }
+
+
+    .contact-item-content h4 {
+        font-size: 17px;
+    }
+
+
+    .contact-item-content p {
+        font-size: 13px;
+    }
+
+
+    .contact-link {
+        font-size: 13px;
+    }
+
+}
+
+/* =========================================================
+   CONTACT FORM — REMOVE EXCESS BOTTOM SPACE
+========================================================= */
+
+.contact-form {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 28px;
+}
+
+
+.contact-form button {
+    margin-bottom: 0;
+}
+
+/* =========================================================
+   CONTACT SECTION — COMPACT & BALANCED LAYOUT
+========================================================= */
+
+#contact {
+    padding-top: 55px;
+    padding-bottom: 45px;
+}
+
+
+/* Keep heading compact */
+
+#contact .section-heading {
+    margin-bottom: 28px;
+}
+
+
+/* Two balanced columns */
+
+#contact .contact-content {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* -----------------------------------------
+   LEFT — Contact Information
+----------------------------------------- */
+
+#contact .contact-info {
+    min-width: 0;
+}
+
+
+#contact .contact-info > h3 {
+    margin-bottom: 8px;
+}
+
+
+#contact .contact-info > p {
+    margin-bottom: 18px;
+}
+
+
+/* Compact cards */
+
+#contact .contact-details {
+    gap: 12px;
+}
+
+
+#contact .contact-item {
+    padding: 15px 18px;
+
+    gap: 14px;
+
+    border-radius: 14px;
+}
+
+
+/* Smaller icons */
+
+#contact .contact-item .contact-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+
+/* Smaller card typography */
+
+#contact .contact-item-content h4 {
+    margin-bottom: 3px;
+
+    font-size: 17px;
+}
+
+
+#contact .contact-item-content p {
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+}
+
+
+#contact .contact-link {
+    font-size: 13px;
+}
+
+
+/* -----------------------------------------
+   RIGHT — Contact Form
+----------------------------------------- */
+
+#contact .contact-form {
+    padding: 22px 24px;
+
+    margin: 0;
+
+    min-height: 0;
+}
+
+
+/* Compact form groups */
+
+#contact .form-group {
+    margin-bottom: 14px;
+}
+
+
+#contact .form-group label {
+    margin-bottom: 6px;
+
+    font-size: 14px;
+}
+
+
+/* Compact inputs */
+
+#contact .contact-form input,
+#contact .contact-form textarea {
+    padding: 11px 13px;
+
+    font-size: 14px;
+}
+
+
+/* Make message box shorter */
+
+#contact .contact-form textarea {
+    min-height: 125px;
+
+    height: 125px;
+
+    resize: vertical;
+}
+
+
+/* Compact Send button */
+
+#contact .contact-form button {
+    margin-top: 2px;
+
+    padding: 13px 18px;
+
+    min-height: 46px;
+}
+
+
+/* =========================================================
+   DESKTOP — KEEP THE WHOLE SECTION BALANCED
+========================================================= */
+
+@media (min-width: 769px) {
+
+    #contact .contact-content {
+        max-width: 1250px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    #contact {
+        padding-top: 45px;
+        padding-bottom: 35px;
+    }
+
+
+    #contact .contact-content {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+    }
+
+
+    #contact .contact-form {
+        padding: 20px;
+    }
+
+
+    #contact .contact-form textarea {
+        min-height: 120px;
+
+        height: 120px;
+    }
+
+}
+
+/* =========================================================
+   CONTACT — FORM ALIGNED WITH CONTACT CARDS
+========================================================= */
+
+@media (min-width: 769px) {
+
+    #contact .contact-content {
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        grid-template-rows:
+            auto
+            auto;
+
+        column-gap: 28px;
+
+        align-items: start;
+    }
+
+
+    /* Left introduction */
+
+    #contact .contact-info {
+        display: contents;
+    }
+
+
+    #contact .contact-info > h3,
+    #contact .contact-info > p {
+        grid-column: 1;
+    }
+
+
+    #contact .contact-info > h3 {
+        grid-row: 1;
+    }
+
+
+    #contact .contact-info > p {
+        grid-row: 1;
+
+        margin-top: 38px;
+    }
+
+
+    /* Contact cards */
+
+    #contact .contact-details {
+        grid-column: 1;
+        grid-row: 2;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    /* Form aligns exactly with cards */
+
+    #contact .contact-form {
+        grid-column: 2;
+        grid-row: 2;
+
+        margin: 0;
+
+        box-sizing: border-box;
+
+        height: 100%;
+
+        padding: 18px 20px;
+
+        display: flex;
+
+        flex-direction: column;
+    }
+
+
+    /* Compact form spacing */
+
+    #contact .form-group {
+        margin-bottom: 10px;
+    }
+
+
+    #contact .form-group label {
+        margin-bottom: 5px;
+    }
+
+
+    #contact .contact-form input {
+        height: 42px;
+
+        padding: 9px 12px;
+    }
+
+
+    #contact .contact-form textarea {
+        height: 105px;
+
+        min-height: 105px;
+    }
+
+
+    #contact .contact-form button {
+        margin-top: auto;
+    }
+
+}
+

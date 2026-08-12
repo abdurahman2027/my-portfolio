@@ -9,8 +9,9 @@ const navLinks =
     document.querySelector(".nav-links");
 
 const navItems =
-    document.querySelectorAll(".nav-links a");
-
+    document.querySelectorAll(
+        ".nav-links a, .footer-links a"
+    );
 
 if (menuToggle && navLinks) {
 
@@ -51,6 +52,9 @@ navItems.forEach((link) => {
 
     link.addEventListener("click", (event) => {
 
+        event.preventDefault();
+
+
         const target =
             link.getAttribute("href");
 
@@ -58,41 +62,25 @@ navItems.forEach((link) => {
         // Make sure the link points to a section
 
         if (
-    target &&
-    target.startsWith("#")
-) {
+            !target ||
+            !target.startsWith("#")
+        ) {
 
-    const sectionId =
-        target.substring(1);
+            return;
 
-
-    // Show the selected section
-
-    showSelectedSection(
-        sectionId
-    );
+        }
 
 
-    // Find the selected section
-
-    const targetSection =
-        document.getElementById(sectionId);
+        const sectionId =
+            target.substring(1);
 
 
-    if (targetSection) {
+        // Show the selected section immediately
 
-        setTimeout(() => {
+        showSelectedSection(
+            sectionId
+        );
 
-            targetSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }, 50);
-
-    }
-
-}
 
         // Close navigation menu
 
@@ -112,16 +100,47 @@ navItems.forEach((link) => {
             "false"
         );
 
-
         menuToggle.setAttribute(
             "aria-label",
             "Open navigation menu"
         );
 
+
+        // Wait for the browser to apply
+        // the section visibility change
+
+        requestAnimationFrame(() => {
+
+            const targetSection =
+                document.getElementById(
+                    sectionId
+                );
+
+
+            if (!targetSection) {
+
+                return;
+
+            }
+
+
+            // Scroll after the section
+            // has become visible
+
+            requestAnimationFrame(() => {
+
+                targetSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            });
+
+        });
+
     });
 
 });
-
 
     // Close menu when clicking outside
 
